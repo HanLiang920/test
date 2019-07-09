@@ -9,11 +9,27 @@ const SLASH = '/'
 const PAREN_LEFT = '('
 const PAREN_RIGHT = ')'
 
-enum Direction {
-  PLUS = 1,
-  MINUS = 1,
-  ASTE = 2,
-  SLASH = 2
+interface IOptsListItem { 
+  name:string
+  priority:number
+} 
+
+interface IOptsList { 
+  [index:string]:IOptsListItem 
+} 
+
+const OptsList:IOptsList = {
+  '+':{name:'PLUS',priority:1} ,
+  '-':{name:'MINUS',priority:1} ,
+  '*':{name:'ASTE',priority:2} ,
+  '/':{name:'SLASH',priority:2} 
+}
+
+const OptPriority = {
+  PLUS: 1,
+  MINUS: 1,
+  ASTE: 2,
+  SLASH: 2
 }
 
 let isOpt = (op: string) => {
@@ -46,9 +62,24 @@ class Calculator extends React.Component<Props, State> {
     const { input } = this.state
     const vals = []
     const opts = []
-    const val = ''
-    input.split('').forEach(it => {
-      if (isOpt(it)) {
+    let val = ''
+    const inputList = input.split('')
+    inputList.forEach(it => {
+      const op = OptsList(it)
+      if (op) {
+        if (val) {
+          vals.push(val)
+          val = ''
+        }
+        if(opts.length<1){
+          opts.push(it)
+        }else{
+          if(OptPriority[it]>=OptPriority[opts[opts.length-1]])
+          
+        }
+       
+      } else {
+        val = val + it
       }
     })
 
