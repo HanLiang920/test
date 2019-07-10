@@ -7,9 +7,33 @@ import TextField from '@material-ui/core/TextField'
 const PAREN_LEFT = '('
 const PAREN_RIGHT = ')'
 
+<<<<<<< HEAD
 interface IOptsListItem {
   name: string
   priority: number
+=======
+interface IOptsListItem { 
+  name:string
+  priority:number
+} 
+
+interface IOptsList { 
+  [index:string]:IOptsListItem 
+} 
+
+const OptsList:IOptsList = {
+  '+':{name:'PLUS',priority:1} ,
+  '-':{name:'MINUS',priority:1} ,
+  '*':{name:'ASTE',priority:2} ,
+  '/':{name:'SLASH',priority:2} 
+}
+
+const OptPriority = {
+  PLUS: 1,
+  MINUS: 1,
+  ASTE: 2,
+  SLASH: 2
+>>>>>>> e65b953a5092dc9a68ac662b78cf8b0b915315a6
 }
 
 interface IOptsList {
