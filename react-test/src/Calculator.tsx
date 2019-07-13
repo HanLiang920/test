@@ -105,6 +105,7 @@ class Calculator extends React.Component<Props, State> {
       vals.splice(i - 2, 0, result)
       i = i - 2
     }
+    
     this.setState({ answer: Number(vals[0]) })
   }
 
