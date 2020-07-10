@@ -74,7 +74,7 @@ export default {
           const blob = new Blob([buffer], { type: "application/vnd.ms-excel" });
           let link = document.createElement("a");
           link.download = `${year}年${month}月课表.xlsx`;
-          link.target = "blank";
+          link.target = "_self";
           // blob --> url
           link.href = URL.createObjectURL(blob);
           link.click();
