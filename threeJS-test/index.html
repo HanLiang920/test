@@ -23,17 +23,23 @@
          */
         var scene = new THREE.Scene();
 
-
-        var geometry = new THREE.BoxGeometry(100, 100, 100); //创建一个立方体几何对象Geometry
-        var material = new THREE.MeshLambertMaterial({
-            color: 0x0000ff
-        }); //材质对象Material
-        var mesh = new THREE.Mesh(geometry, material); //网格模型对象Mesh
-        scene.add(mesh)
         /**
-         * 光源设置
-         */
-        //点光源
+        * 创建旋转网格模型
+        */
+        var points = [
+            new THREE.Vector2(50, 60),
+            new THREE.Vector2(25, 0),
+            new THREE.Vector2(50, -60)
+        ];
+        var geometry = new THREE.LatheGeometry(points, 30);
+        var material = new THREE.MeshPhongMaterial({
+            color: 0x0000ff,//三角面颜色
+            side: THREE.DoubleSide//两面可见
+        });//材质对象
+        material.wireframe = true;//线条模式渲染(查看细分数)
+        var mesh = new THREE.Mesh(geometry, material);//旋转网格模型对象
+        scene.add(mesh);//旋转网格模型添加到场景中
+
         var point = new THREE.PointLight(0xffffff);
         point.position.set(400, 200, 300); //点光源位置
         scene.add(point); //点光源添加到场景中
@@ -68,9 +74,13 @@
         function render() {
             renderer.render(scene, camera);//执行渲染操作
         }
+
         render();
+
         var controls = new THREE.OrbitControls(camera, renderer.domElement);//创建控件对象
         controls.addEventListener('change', render);//监听鼠标、键盘事件
+
+        if (this.options && this.options.movePreventDefault) { b.preventDefault(); }
     </script>
 </body>
 
